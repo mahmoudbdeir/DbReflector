@@ -12,36 +12,25 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var cs = @"server=.\sqlexpress;database=12;Trusted_Connection=True;";
+            var cs = @"server=.\sqlexpress;database=AdventureWorksCS;Trusted_Connection=True;";
             ISchemaInfo ShemaInfo = SchemaInfoFactory.CreateInstance(cs, CSharpTableInfoFormatter.CreateInstance(), "myapp").Reflect();
-            ITableInfo table = ShemaInfo.Tables["schema.table"];
-            
+            ITableInfo table = ShemaInfo.Tables["Person.Address"];
+
+            Console.WriteLine(table.TableFQN);
             Console.WriteLine("\nAll columns");
-            foreach (var col in table.Columns)
+            foreach (var col in table.Columns.Values)
             {
-                Console.WriteLine(col.Key);
+                string dbtype = $"{col.DataType}" + (col.MaxLength==null? string.Empty : $"({col.MaxLength})");
+                Console.WriteLine($"\n\nColumn: {col.ColumnName}");
+                Console.WriteLine($"Domain: {col.DomainName}");
+                Console.WriteLine($"Db Type: {dbtype}");
+                Console.WriteLine($"C# Type: {col.CSharpType}");
+                Console.WriteLine($"Primary Key? {col.IsPrimaryKey}");
+                Console.WriteLine($"Foreign Key? {col.IsForeignKey}");
+                Console.WriteLine($"Nullable? {col.IsNullable}");
+                
             }
-
-            Console.WriteLine("\nColumns that are not primary keys");
-            foreach (var col in table.Columns_NotPrimaryKeys)
-            {
-                Console.WriteLine(col.ColumnKey);
-            }
-
-            Console.WriteLine("\nColumns that do not allow nulls");
-            foreach (var col in table.Columns_NotNullable)
-            {
-                Console.WriteLine(col.ColumnKey);
-            }
-
-            Console.WriteLine("\nColumns that are foreign keys");
-            foreach (var col in table.Columns_ForeignKeys)
-            {
-                Console.WriteLine(col.ColumnKey);
-            }
-
         }
     }
 }
-
 ```
