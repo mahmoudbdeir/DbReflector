@@ -9,6 +9,13 @@
     <PackageIcon>diffuse-reflection.png</PackageIcon>
     <RepositoryUrl>https://github.com/mbdeir/DbReflector</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Copyright>© 2021 Mahmoud Bdeir</Copyright>
+    <PackageLicenseFile>MIT License.txt</PackageLicenseFile>
+    <PackageTags>database reflection code generation</PackageTags>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
+    <PackageReleaseNotes>Bug fix: removed DbReflector.Common.dll dependency.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +29,10 @@
 
   <ItemGroup>
     <None Include="..\..\..\..\..\..\Trash\diffuse-reflection.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\..\..\..\..\Trash\MIT License.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
