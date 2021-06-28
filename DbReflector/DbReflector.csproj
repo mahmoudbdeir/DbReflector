@@ -12,10 +12,10 @@
     <Copyright>© 2021 Mahmoud Bdeir</Copyright>
     <PackageLicenseFile>MIT License.txt</PackageLicenseFile>
     <PackageTags>database reflection code generation</PackageTags>
-    <Version>1.0.2</Version>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
-    <PackageReleaseNotes>Bug fix: removed DbReflector.Common.dll dependency.</PackageReleaseNotes>
+    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+    <PackageReleaseNotes>Bug fix: SchemaInfoFactory.CreateInstance was not always refreshing the metamodel.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

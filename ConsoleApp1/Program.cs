@@ -8,9 +8,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var cs = @"server=.\sqlexpress;database=AdventureWorksCS;Trusted_Connection=True;";
-            ISchemaInfo ShemaInfo = SchemaInfoFactory.CreateInstance(cs, CSharpTableInfoFormatter.CreateInstance(), "myapp").Reflect();
-            ITableInfo table = ShemaInfo.Tables["Person.Address"];
+            var cs = @"server=.\sqlexpress;database=AdventureWorks2019;Trusted_Connection=True;";
+            ISchemaInfo SchemaInfo = SchemaInfoFactory.CreateInstance(cs, CSharpTableInfoFormatter.CreateInstance(), "myapp").Reflect();
+            ITableInfo table = SchemaInfo.Tables["Person.Person"];
 
             Console.WriteLine(table.TableFQN);
             Console.WriteLine("\nAll columns");

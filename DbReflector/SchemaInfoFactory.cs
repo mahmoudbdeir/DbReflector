@@ -30,8 +30,9 @@ namespace DbReflector
                 throw new Exception("applicationName cannot be null or empty string nor can it contain spaces.");
 
             var hash = connectionString.GetHashCode();
-            if (_schemaInfoFactory.ContainsKey(hash) == false)
+            if (refreshMetadata || _schemaInfoFactory.ContainsKey(hash) == false)
             {
+                if (_schemaInfoFactory.ContainsKey(hash)) _schemaInfoFactory.Remove(hash);
                 _schemaInfoFactory.Add(hash, new SchemaInfoFactory(connectionString, formatter, applicationName, refreshMetadata));
             }
             return _schemaInfoFactory[hash];
