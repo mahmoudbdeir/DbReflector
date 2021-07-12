@@ -22,22 +22,25 @@ namespace DbReflector
             this._formatter = formatter;
             _schemaInfo = new SchemaInfo(connectionString, formatter);
         }
-        static Dictionary<int,SchemaInfoFactory> _schemaInfoFactory = new Dictionary<int, SchemaInfoFactory>();
+        static Dictionary<int, SchemaInfoFactory> _schemaInfoFactory = new Dictionary<int, SchemaInfoFactory>();
         static readonly char[] ForbiddenApplicationNameCharacters = new char[] { ' ' };
+        private static object o = new object();
         public static SchemaInfoFactory CreateInstance(string connectionString, ITableInfoFormatter formatter, string applicationName, bool refreshMetadata = true)
         {
             if (string.IsNullOrWhiteSpace(applicationName) || applicationName.IndexOfAny(ForbiddenApplicationNameCharacters) > 0)
                 throw new Exception("applicationName cannot be null or empty string nor can it contain spaces.");
 
-            var hash = connectionString.GetHashCode();
-            if (refreshMetadata || _schemaInfoFactory.ContainsKey(hash) == false)
+            lock (o)
             {
-                if (_schemaInfoFactory.ContainsKey(hash)) _schemaInfoFactory.Remove(hash);
-                _schemaInfoFactory.Add(hash, new SchemaInfoFactory(connectionString, formatter, applicationName, refreshMetadata));
+                var hash = connectionString.GetHashCode();
+                if (refreshMetadata || _schemaInfoFactory.ContainsKey(hash) == false)
+                {
+                    if (_schemaInfoFactory.ContainsKey(hash)) _schemaInfoFactory.Remove(hash);
+                    _schemaInfoFactory.Add(hash, new SchemaInfoFactory(connectionString, formatter, applicationName, refreshMetadata));
+                }
+                return _schemaInfoFactory[hash];
             }
-            return _schemaInfoFactory[hash];
         }
-
         public ISchemaInfo Reflect()
         {
 
@@ -50,7 +53,7 @@ namespace DbReflector
                 DbUdtReflector.CreateInstance().Reflect(factory, _schemaInfo);
                 return _schemaInfo;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
