@@ -33,12 +33,12 @@ namespace DbReflector
         string _applicationName;
         string _connectionString;
 
-        public static readonly string SqliteDb ="URI=file:" + Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),  "DbReflector.db"); //@"URI=file:C:\trash\dbReflector.db"
+        public static readonly string SqliteDb = "URI=file:" + Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DbReflector.db"); //@"URI=file:C:\trash\dbReflector.db"
         SqlHelper(string connectionString, string applicationName, bool refreshMetaData)
         {
             _connectionString = connectionString;
             _applicationName = applicationName;
-            
+
             _SqliteConnection = new SQLiteConnection(SqliteDb);
             _SqliteConnection.Open();
             _SqliteCommand = new SQLiteCommand();
@@ -172,13 +172,18 @@ namespace DbReflector
         void InsertIntoProcColumns(DataTable table)
         {
             var sql = $"INSERT INTO ProcColumns(APPLICATION_NAME,SCHEMA_NAME,PROC_NAME,ORDINAL_POSITION,COLUMN_NAME,IsNullable,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH,DOMAIN_NAME) VALUES";
-
+            HashSet<string> set = new HashSet<string>();
             var values = new List<string>();
 
             for (int row_index = 0; row_index < table.Rows.Count; row_index++)
             {
                 DataRow row = table.Rows[row_index];
-                values.Add($"('{row["application_name"]}','{row["schema_name"]}','{row["proc_name"]}','{row["ordinal_position"]}','{row["column_name"]}','{row["is_nullable"]}','{row["data_type"]}','{row["character_maximum_length"]}','{row["domain_name"]}')");
+                string key = $"{row["schema_name"]}-{row["proc_name"]}-{row["column_name"]}";
+                if (!set.Contains(key))
+                {
+                    values.Add($"('{row["application_name"]}','{row["schema_name"]}','{row["proc_name"]}','{row["ordinal_position"]}','{row["column_name"]}','{row["is_nullable"]}','{row["data_type"]}','{row["character_maximum_length"]}','{row["domain_name"]}')");
+                    set.Add(key);
+                }
             }
             sql += string.Join(",", values);
             _SqliteCommand.CommandText = sql;
@@ -209,7 +214,7 @@ namespace DbReflector
             for (int row_index = 0; row_index < table.Rows.Count; row_index++)
             {
                 DataRow row = table.Rows[row_index];
-                values.Add($"('{row["application_name"]}','{row["SchemaName"]}','{row["ProcName"]}','{row["IgnoreProc"]}','{row["SourceCode"].ToString().Replace("'","''")}')");
+                values.Add($"('{row["application_name"]}','{row["SchemaName"]}','{row["ProcName"]}','{row["IgnoreProc"]}','{row["SourceCode"].ToString().Replace("'", "''")}')");
             }
             sql += string.Join(",", values);
             _SqliteCommand.CommandText = sql;

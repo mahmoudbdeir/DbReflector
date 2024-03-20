@@ -2,12 +2,8 @@
 using DbReflector.Common;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace ConsoleApp1
@@ -53,14 +49,19 @@ public partial class Procs
         {
 
             var cs = Environment.GetEnvironmentVariable("connectionString");
-            ISchemaInfo SchemaInfo = SchemaInfoFactory.CreateInstance(cs, CSharpTableInfoFormatter.CreateInstance(), "myapp", refreshMetadata: true).Reflect();
-            const string procName = "alexa.spGetAlexaReplyByIntent";
+            ISchemaInfo SchemaInfo = SchemaInfoFactory.CreateInstance(cs, CSharpTableInfoFormatter.CreateInstance(), "myapp", refreshMetadata: false).Reflect();
+            const string procName = "tools.spCreateConcierge";
             IProcInfo proc = SchemaInfo.Procedures[procName];
-            GenerateProc(proc);
+            WriteProcBody(proc);
+            //GenerateProc(proc);
         }
         readonly static string[] StringTypes = new string[3] { "char", "varchar", "nvarchar" };
         readonly static string[] NumberTypes = new string[1] { "int"};
         
+        static void WriteProcBody(IProcInfo proc)
+        {
+            File.WriteAllText($@"{OutputPath}\{proc.ProcName}.cs", proc.SourceCode);
+        }
         private static void GenerateProc(IProcInfo proc)
         {
             
@@ -139,7 +140,9 @@ public partial class Procs
                 .Replace("{{error}}", $"(ex,null,{string.Join(",", ReturnError)})")
                 .Replace("{{functionParams}}", $"{string.Join(",", FunctionParams)}")
                 ;
-            File.WriteAllText($@"{OutputPath}\{proc.ProcName}.cs", code);
+            string file = $@"{OutputPath}\{proc.ProcName}.cs";
+            File.WriteAllText(file, code);
+            Console.WriteLine(file);
         }
     }
 }
