@@ -8,11 +8,11 @@
     <PackageIcon>diffuse-reflection.png</PackageIcon>
     <RepositoryUrl>https://github.com/mbdeir/DbReflector</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Copyright>© 2021 Mahmoud Bdeir</Copyright>
+    <Copyright>© 2021-2024 Mahmoud Bdeir</Copyright>
     <PackageTags>database reflection code generation</PackageTags>
-    <Version>1.0.6</Version>
-    <AssemblyVersion>1.0.6.0</AssemblyVersion>
-    <FileVersion>1.0.6.0</FileVersion>
+    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <PackageReleaseNotes>No longer creates cache tables in the database you are reflecting, now uses local Sqlite database for caching.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DbReflector.Common\DbReflector.Common.csproj" />
+    <Reference Include="DbReflector.Common">
+      <HintPath>bin\Debug\netstandard2.1\DbReflector.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

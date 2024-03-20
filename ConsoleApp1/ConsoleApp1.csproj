@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DbReflector.Common\DbReflector.Common.csproj" />
     <ProjectReference Include="..\DbReflector\DbReflector.csproj" />
   </ItemGroup>
 

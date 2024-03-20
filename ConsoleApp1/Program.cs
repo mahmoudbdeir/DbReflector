@@ -50,10 +50,10 @@ public partial class Procs
 
             var cs = Environment.GetEnvironmentVariable("connectionString");
             ISchemaInfo SchemaInfo = SchemaInfoFactory.CreateInstance(cs, CSharpTableInfoFormatter.CreateInstance(), "myapp", refreshMetadata: false).Reflect();
-            const string procName = "tools.spCreateConcierge";
+            const string procName = "onehelen.spvideo_insert10";
             IProcInfo proc = SchemaInfo.Procedures[procName];
-            WriteProcBody(proc);
-            //GenerateProc(proc);
+            //WriteProcBody(proc);
+            GenerateProc(proc);
         }
         readonly static string[] StringTypes = new string[3] { "char", "varchar", "nvarchar" };
         readonly static string[] NumberTypes = new string[1] { "int"};
