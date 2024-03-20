@@ -4,24 +4,23 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Mahmoud Bdeir</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>A class library that represents database objects, handy for code generation.</Description>
     <PackageIcon>diffuse-reflection.png</PackageIcon>
     <RepositoryUrl>https://github.com/mbdeir/DbReflector</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Copyright>© 2021 Mahmoud Bdeir</Copyright>
-    <PackageLicenseFile>MIT License.txt</PackageLicenseFile>
     <PackageTags>database reflection code generation</PackageTags>
     <Version>1.0.6</Version>
     <AssemblyVersion>1.0.6.0</AssemblyVersion>
     <FileVersion>1.0.6.0</FileVersion>
     <PackageReleaseNotes>No longer creates cache tables in the database you are reflecting, now uses local Sqlite database for caching.</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.114.3" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,13 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\..\..\Trash\diffuse-reflection.png">
+    <None Update="diffuse-reflection.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\..\..\..\..\..\Trash\MIT License.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

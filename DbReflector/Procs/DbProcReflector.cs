@@ -32,7 +32,7 @@ namespace DbReflector
                         direction = DirectionEnum.In;
                         break;
                     case "inout":
-                        direction = DirectionEnum.InOut;
+                        direction = DirectionEnum.Out;
                         break;
                     default:
                         throw new Exception($"DbProcReflector::Reflect() => Unexpected value for [Parameter Direction]. The value was: {direction}");

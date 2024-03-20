@@ -29,44 +29,44 @@ namespace DbReflector.UnitTesting.Exhaustive
         //[Test]
         //public void GetByName()
         //{
-        //    Assert.IsNotNull(t, $"Could not find {TableName}");
+        //    Assert.That(t, $"Could not find {TableName}");
         //}
 
         //[Test]
         //public void CountOfColumns()
         //{
-        //    Assert.AreEqual(NumOfColumns, t.Columns.Count);
+        //    Assert.Equals(NumOfColumns, t.Columns.Count);
         //}
 
         //[Test]
         //public void GetColumnByName()
         //{
-        //    Assert.IsNotNull(c);
+        //    Assert.That(c);
         //}
 
         //[Test]
         //public void PrimaryKey()
         //{
-        //    Assert.AreEqual(IsItPrimaryKey, c.IsPrimaryKey);
+        //    Assert.Equals(IsItPrimaryKey, c.IsPrimaryKey);
         //}
 
 
         //[Test]
         //public void DataType()
         //{
-        //    Assert.AreEqual(DATA_TYPE, c.DataType);
+        //    Assert.Equals(DATA_TYPE, c.DataType);
         //}
 
         //[Test]
         //public void CsharpDataType()
         //{
-        //    Assert.AreEqual(CSharpType, c.CSharpType, $"{this.GetType().Name} {this.ColumnName}");
+        //    Assert.Equals(CSharpType, c.CSharpType, $"{this.GetType().Name} {this.ColumnName}");
         //}
 
         //[Test]
         //public void IsNullable()
         //{
-        //    Assert.AreEqual(IsItNullable, c.IsNullable);
+        //    Assert.Equals(IsItNullable, c.IsNullable);
         //}
     }
 }

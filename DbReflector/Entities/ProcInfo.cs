@@ -22,7 +22,7 @@ namespace DbReflector
         public IProcParamInfo ReturnParameter { get; internal set; }
         public string DictionaryKey => $"{ProcSchema}.{ProcName}";
 
-        public bool ReturnsOutputParameters => Parameters.Any(p => p.Value.Direction == DirectionEnum.InOut);
+        public bool ReturnsOutputParameters => Parameters.Any(p => p.Value.Direction == DirectionEnum.Out);
 
         public bool ReturnsTable => Columns.Count > 0;
 
